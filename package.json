@@ -1,0 +1,35 @@
+{
+  "name": "votacao-monorepo",
+  "version": "1.0.0",
+  "description": "Sistema de votação - Monorepo com API e Frontend",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "npm run dev --workspace=packages/api",
+    "dev:web": "npm run dev --workspace=packages/web",
+    "build": "npm run build --workspaces",
+    "build:api": "npm run build --workspace=packages/api",
+    "build:web": "npm run build --workspace=packages/web",
+    "start:api": "npm run start --workspace=packages/api",
+    "preview:web": "npm run preview --workspace=packages/web",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up",
+    "docker:dev:build": "docker-compose -f docker-compose.dev.yml up --build",
+    "docker:prod": "docker-compose up",
+    "docker:prod:build": "docker-compose up --build",
+    "docker:down": "docker-compose down",
+    "docker:down:dev": "docker-compose -f docker-compose.dev.yml down"
+  },
+  "keywords": [
+    "votacao",
+    "monorepo",
+    "99vidas"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

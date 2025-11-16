@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./packages/api
+      dockerfile: Dockerfile
+    container_name: votacao-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=${MONGODB_URI:-mongodb://localhost:27017/votacao}
+      - PORT=3000
+    networks:
+      - votacao-network
+    volumes:
+      - ./packages/api:/app
+      - /app/node_modules
+    command: sh -c "npm run seed && npm start"
+
+  web:
+    build:
+      context: ./packages/web
+      dockerfile: Dockerfile
+    container_name: votacao-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - votacao-network
+
+networks:
+  votacao-network:
+    driver: bridge

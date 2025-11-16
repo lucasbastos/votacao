@@ -1,0 +1,18 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copiar package.json e package-lock.json
+COPY package*.json ./
+
+# Instalar todas as dependências (incluindo dev)
+RUN npm install
+
+# Copiar código fonte
+COPY . .
+
+# Expor porta
+EXPOSE 3000
+
+# Comando para desenvolvimento (será sobrescrito pelo docker-compose)
+CMD ["npm", "run", "dev"]
