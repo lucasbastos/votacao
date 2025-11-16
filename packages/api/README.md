@@ -64,10 +64,10 @@ Retorna a lista de todos os jogos da collection `jogos_2025`.
 
 Após iniciar o servidor, a API estará disponível em:
 ```
-http://localhost:3000
+http://localhost:5000
 ```
 
 Endpoint de jogos:
 ```
-http://localhost:3000/api/jogos
+http://localhost:5000/api/jogos
 ```

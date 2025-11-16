@@ -7,6 +7,7 @@ import jogosRoutes from './routes/jogosRoutes';
 import votosRoutes from './routes/votosRoutes';
 import episodiosRoutes from './routes/episodiosRoutes';
 import votosEpisodiosRoutes from './routes/votosEpisodiosRoutes';
+import authRoutes from './routes/authRoutes';
 import { swaggerSpec } from './config/swagger';
 
 dotenv.config();
@@ -33,6 +34,7 @@ app.use('/api', jogosRoutes);
 app.use('/api', votosRoutes);
 app.use('/api', episodiosRoutes);
 app.use('/api', votosEpisodiosRoutes);
+app.use('/api/auth', authRoutes);
 
 // Inicializar servidor
 const startServer = async () => {

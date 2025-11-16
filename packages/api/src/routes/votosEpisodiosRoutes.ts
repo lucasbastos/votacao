@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { registrarVotoEpisodio, verificarVotoEpisodio } from '../controllers/votosEpisodiosController';
+import { authMiddleware } from '../middleware/auth';
 
 const router = Router();
 
@@ -81,7 +82,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.post('/votos-episodios', registrarVotoEpisodio);
+router.post('/votos-episodios', authMiddleware, registrarVotoEpisodio);
 
 /**
  * @swagger

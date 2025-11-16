@@ -1,9 +1,15 @@
 <template>
   <div id="app">
-    <header class="app-header">
-      <h1>🗳️ Sistema de Votação 99Vidas</h1>
-      <p class="subtitulo">Vote nos seus jogos favoritos e no melhor episódio do podcast!</p>
-    </header>
+    <!-- Tela de Login -->
+    <Login v-if="!isLoggedIn" @login-success="handleLoginSuccess" />
+    
+    <!-- Aplicação Principal -->
+    <div v-else class="app-container">
+      <header class="app-header">
+        <h1>🗳️ Sistema de Votação 99Vidas</h1>
+        <p class="subtitulo">Vote nos seus jogos favoritos e no melhor episódio do podcast!</p>
+        <button @click="handleLogout" class="btn-logout">Sair</button>
+      </header>
     
     <div class="voter-id-section" v-if="!voterIdConfirmado">
       <div class="voter-id-card">
@@ -56,25 +62,30 @@
     
     <footer class="app-footer">
       <p>Sistema de Votação 99Vidas - {{ anoAtual }}</p>
-      <p class="info-api">API: <a href="http://localhost:3000/api-docs" target="_blank">http://localhost:3000/api-docs</a></p>
+      <p class="info-api">API: <a href="http://localhost:5000/api-docs" target="_blank">http://localhost:5000/api-docs</a></p>
     </footer>
+  </div>
   </div>
 </template>
 
 <script>
+import Login from './components/Login.vue';
 import VotacaoJogos from './components/VotacaoJogos.vue';
 import VotacaoEpisodios from './components/VotacaoEpisodios.vue';
+import { isAuthenticated, logout } from './services/api';
 
 export default {
   name: 'App',
   
   components: {
+    Login,
     VotacaoJogos,
     VotacaoEpisodios
   },
   
   data() {
     return {
+      isLoggedIn: false,
       voterId: '',
       voterIdInput: '',
       voterIdConfirmado: false,
@@ -89,6 +100,9 @@ export default {
   },
   
   mounted() {
+    // Verificar se está autenticado
+    this.isLoggedIn = isAuthenticated();
+    
     // Tenta recuperar o voterId do localStorage
     const savedVoterId = localStorage.getItem('voterId');
     if (savedVoterId) {
@@ -98,6 +112,19 @@ export default {
   },
   
   methods: {
+    handleLoginSuccess() {
+      this.isLoggedIn = true;
+    },
+    
+    handleLogout() {
+      if (confirm('Deseja realmente sair?')) {
+        logout();
+        this.isLoggedIn = false;
+        this.voterIdConfirmado = false;
+        this.voterId = '';
+        localStorage.removeItem('voterId');
+      }
+    },
     confirmarVoterId() {
       const id = this.voterIdInput.trim();
       if (id) {
@@ -142,6 +169,7 @@ body {
   padding: 30px 20px;
   text-align: center;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: relative;
 }
 
 .app-header h1 {
@@ -153,6 +181,24 @@ body {
 .subtitulo {
   color: #666;
   font-size: 1.1em;
+}
+
+.btn-logout {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn-logout:hover {
+  background: #da190b;
 }
 
 .voter-id-section {

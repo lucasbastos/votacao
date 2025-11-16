@@ -15,12 +15,7 @@
     "build:web": "npm run build --workspace=packages/web",
     "start:api": "npm run start --workspace=packages/api",
     "preview:web": "npm run preview --workspace=packages/web",
-    "docker:dev": "docker-compose -f docker-compose.dev.yml up",
-    "docker:dev:build": "docker-compose -f docker-compose.dev.yml up --build",
-    "docker:prod": "docker-compose up",
-    "docker:prod:build": "docker-compose up --build",
-    "docker:down": "docker-compose down",
-    "docker:down:dev": "docker-compose -f docker-compose.dev.yml down"
+    "seed": "npm run seed --workspace=packages/api"
   },
   "keywords": [
     "votacao",

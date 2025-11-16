@@ -11,7 +11,7 @@ Aplicação Vue.js para votação de jogos e episódios do podcast 99Vidas.
 ## 📋 Pré-requisitos
 
 - Node.js 16+ instalado
-- API backend rodando em `http://localhost:3000`
+- API backend rodando em `http://localhost:5000`
 
 ## 🔧 Instalação
 
@@ -73,7 +73,7 @@ votacao-front/
 
 ## 🔗 API
 
-A aplicação se comunica com a API backend em `http://localhost:3000/api`
+A aplicação se comunica com a API backend em `http://localhost:5000/api`
 
 Endpoints utilizados:
 - `GET /api/jogos` - Lista jogos

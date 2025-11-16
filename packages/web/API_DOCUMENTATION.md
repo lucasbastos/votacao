@@ -2,9 +2,9 @@
 
 ## 📌 Informações Gerais
 
-**Base URL:** `http://localhost:3000`
+**Base URL:** `http://localhost:5000`
 
-**Documentação Interativa (Swagger):** `http://localhost:3000/api-docs`
+**Documentação Interativa (Swagger):** `http://localhost:5000/api-docs`
 
 Todos os endpoints retornam JSON e utilizam o prefixo `/api`.
 
@@ -34,7 +34,7 @@ Lista todos os jogos disponíveis para votação.
 **Exemplo Vue.js:**
 ```javascript
 async function carregarJogos() {
-  const response = await fetch('http://localhost:3000/api/jogos');
+  const response = await fetch('http://localhost:5000/api/jogos');
   const result = await response.json();
   if (result.success) {
     this.jogos = result.data;
@@ -96,7 +96,7 @@ Registra o voto de um usuário (3 jogos ordenados por preferência).
 ```javascript
 async function enviarVoto(voterId, jogosSelecionados) {
   try {
-    const response = await fetch('http://localhost:3000/api/votos', {
+    const response = await fetch('http://localhost:5000/api/votos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ Quando não votou:
 **Exemplo Vue.js:**
 ```javascript
 async function verificarSeJaVotou(voterId) {
-  const response = await fetch(`http://localhost:3000/api/votos/${voterId}`);
+  const response = await fetch(`http://localhost:5000/api/votos/${voterId}`);
   const result = await response.json();
   return result.jaVotou;
 }
@@ -183,7 +183,7 @@ Lista todos os episódios do podcast 99Vidas.
 **Exemplo Vue.js:**
 ```javascript
 async function carregarEpisodios() {
-  const response = await fetch('http://localhost:3000/api/episodios');
+  const response = await fetch('http://localhost:5000/api/episodios');
   const result = await response.json();
   if (result.success) {
     this.episodios = result.data;
@@ -237,7 +237,7 @@ Registra o voto de um usuário para episódio favorito (apenas 1 escolha).
 ```javascript
 async function votarEpisodio(voterId, episodioId) {
   try {
-    const response = await fetch('http://localhost:3000/api/votos-episodios', {
+    const response = await fetch('http://localhost:5000/api/votos-episodios', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -282,7 +282,7 @@ Verifica se um votante já registrou seu voto para episódio.
 **Exemplo Vue.js:**
 ```javascript
 async function verificarVotoEpisodio(voterId) {
-  const response = await fetch(`http://localhost:3000/api/votos-episodios/${voterId}`);
+  const response = await fetch(`http://localhost:5000/api/votos-episodios/${voterId}`);
   const result = await response.json();
   return result.jaVotou;
 }
@@ -296,7 +296,7 @@ async function verificarVotoEpisodio(voterId) {
 
 ```javascript
 // src/services/api.js
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'http://localhost:5000/api';
 
 export const api = {
   // Jogos
@@ -471,5 +471,5 @@ Todos os endpoints podem retornar os seguintes erros:
 
 ## 🔗 Links Úteis
 
-- **Swagger UI:** http://localhost:3000/api-docs (documentação interativa completa)
-- **Endpoint raiz:** http://localhost:3000/ (informações básicas da API)
+- **Swagger UI:** http://localhost:5000/api-docs (documentação interativa completa)
+- **Endpoint raiz:** http://localhost:5000/ (informações básicas da API)
